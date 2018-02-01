@@ -1,23 +1,18 @@
+var express = require('express');
+var expressGraphQL = require('express-graphql');
 var { graphql, buildSchema } = require('graphql');
+const schema = require('./schema/schema');
 
 
-var schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
 
-//root is a resolver
+var app = express();
+app.use('/graphql', expressGraphQL({
+    schema: schema,
+    graphiql: true
 
-var root = {
-    hello: () => {
-        return "Hello GraphQL"
-    }
-};
+}));
 
 
-graphql(schema, '{hello}', root).then(
-    (response) =>{
-        console.log("graphql","server", "response", response);
-    }
-);
+app.listen(process.env.PORT, process.env.IP, () => {
+    console.log("server running", "IP:PORT", process.env.IP, process.env.PORT);
+});
