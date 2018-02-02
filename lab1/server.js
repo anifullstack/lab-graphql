@@ -14,5 +14,5 @@ app.use('/graphql', expressGraphQL({
 
 
 app.listen(process.env.PORT, process.env.IP, () => {
-    console.log("server running", "IP:PORT", process.env.IP, process.env.PORT);
+    console.log("server running", "v0.0.01", "IP:PORT", process.env.IP, process.env.PORT);
 });
